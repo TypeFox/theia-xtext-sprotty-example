@@ -3,23 +3,46 @@
  */
 package io.typefox.examples.theia.states.validation
 
+import com.google.common.collect.Multimaps
+import io.typefox.examples.theia.states.states.StateMachine
+import io.typefox.examples.theia.states.states.StatesPackage
+import org.eclipse.xtext.validation.Check
 
 /**
  * This class contains custom validation rules. 
- *
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
+@@ -11,15 +15,35 @@ package io.typefox.examples.theia.states.validation
  */
 class StatesValidator extends AbstractStatesValidator {
 	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					StatesPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	@Check
+	def checkState(io.typefox.examples.theia.states.states.State state) {
+		val event2transition = Multimaps.index(state.transitions, [event.name ?: ''])
+		event2transition.keySet.forEach [ name |
+			val transitionsWithCommonName = event2transition.get(name)
+			if (transitionsWithCommonName.size > 1) 
+				transitionsWithCommonName.forEach [
+					error('''Multiple transitions on event «name»''', it, StatesPackage.Literals.TRANSITION__EVENT)
+			]
+		]
+	}
 	
+	@Check
+	def checkUniqueNames(StateMachine sm) {
+		val name2state = Multimaps.index(sm.states, [name ?: ''])
+		name2state.keySet.forEach [ name |
+			val statesWithCommonName = name2state.get(name)
+			if (statesWithCommonName.size > 1) 
+				statesWithCommonName.forEach [
+					error('''Multiple states named '«name»'«»''', it, StatesPackage.Literals.STATE__NAME)
+			]
+		]
+		val name2event = Multimaps.index(sm.events, [name ?: ''])
+		name2event.keySet.forEach [ name |
+			val eventsWithCommonName = name2event.get(name)
+			if (eventsWithCommonName.size > 1) 
+				eventsWithCommonName.forEach [
+					error('''Multiple events named '«name»'«»''', it, StatesPackage.Literals.EVENT__NAME)
+			]
+		]
+	}
 }
