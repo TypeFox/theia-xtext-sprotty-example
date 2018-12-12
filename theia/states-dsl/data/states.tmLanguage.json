@@ -1,0 +1,66 @@
+{
+    "name": "States DSL",
+    "scopeName": "source.sm",
+    "fileTypes": [
+        "sm"
+    ],
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "name": "keyword.control.states",
+            "match": "\\b(statemachine|state|event|=>)\\b"
+        },
+        {
+            "name": "keyword.operator.states",
+            "match": "\\=\\>"
+        },
+        {
+            "name": "constant.numeric.states",
+            "match": "\\b[1-9][0-9]*\\b"
+        },
+        {
+            "name": "string.quoted.double.states",
+            "begin": "\"",
+            "end": "\""
+        },
+        {
+            "name": "string.quoted.single.states",
+            "begin": "'",
+            "end": "'"
+        }
+    ],
+    "repository": 
+        {
+            "comments": {
+                "patterns": [
+                    {
+                        "name": "comment.block.states",
+                        "begin": "/\\*",
+                        "beginCaptures": {
+                            "0": {
+                                "name": "punctuation.definition.comment.states"
+                            }
+                        },
+                        "end": "\\*/",
+                        "endCaptures": {
+                            "0": {
+                                "name": "punctuation.definition.comment.states"
+                            }
+                        }
+                    }, {
+                        "begin": "(^\\s+)?(?=//)",
+                        "beginCaptures": {
+                            "1": {
+                                "name": "punctuation.whitespace.comment.leading.cs"
+                            }
+                        },
+                        "end": "(?=$)",
+                        "name":"comment.line.states"
+                    }
+                ]
+            }
+        }
+    
+}

@@ -7,7 +7,8 @@
   "files": [
     "lib",
     "src",
-    "build"
+    "build",
+    "data"
   ],
   "dependencies": {
     "@theia/core": "latest"

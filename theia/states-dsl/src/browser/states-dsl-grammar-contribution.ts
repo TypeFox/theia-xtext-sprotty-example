@@ -18,5 +18,51 @@ export class StatesGrammarContribution implements LanguageGrammarDefinitionContr
                 'text/sm'
             ]
         });
+        monaco.languages.setLanguageConfiguration(STATES_LANGUAGE_SERVER_ID, this.configuration);
+
+        const statesGrammar = require('../../data/states.tmLanguage.json');
+        registry.registerTextmateGrammarScope('source.sm', {
+            async getGrammarDefinition() {
+                return {
+                    format: 'json',
+                    content: statesGrammar,
+                };
+            }
+        });
+        registry.mapLanguageIdToTextmateGrammar(STATES_LANGUAGE_SERVER_ID, 'source.sm');
     }
+
+    protected configuration: monaco.languages.LanguageConfiguration = {
+        'comments': {
+            'lineComment': '//',
+            'blockComment': ['/*', '*/']
+        },
+        'brackets': [
+            ['{', '}'],
+            ['[', ']'],
+            ['(', ')']
+        ],
+        'autoClosingPairs': [
+            { 'open': '{', 'close': '}' },
+            { 'open': '[', 'close': ']' },
+            { 'open': '(', 'close': ')' },
+            { 'open': "'", 'close': "'", 'notIn': ['string', 'comment'] },
+            { 'open': '"', 'close': '"', 'notIn': ['string'] },
+            { 'open': '/**', 'close': ' */', 'notIn': ['string'] }
+        ],
+        'surroundingPairs': [
+            { 'open': '{', 'close': '}' },
+            { 'open': '[', 'close': ']' },
+            { 'open': '(', 'close': ')' },
+            { 'open': "'", 'close': "'" },
+            { 'open': '"', 'close': '"' },
+            { 'open': '`', 'close': '`' }
+        ],
+        'folding': {
+            'markers': {
+                'start': new RegExp('^\\s*//\\s*#?region\\b'),
+                'end': new RegExp('^\\s*//\\s*#?endregion\\b')
+            }
+        }
+    };
 }
