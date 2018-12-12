@@ -6,4 +6,5 @@ dependencies {
 
 apply plugin: 'application'
 mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
+applicationName = 'states-language-server'
 

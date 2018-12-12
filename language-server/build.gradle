@@ -20,7 +20,7 @@ subprojects {
 	apply plugin: 'eclipse'
 	
 	group = 'io.typefox.examples.theia.states'
-	version = '1.0.0-SNAPSHOT'
+	//version = '1.0.0-SNAPSHOT'
 	
 	sourceCompatibility = '1.8'
 	targetCompatibility = '1.8'
