@@ -2,9 +2,12 @@ dependencies {
 	compile project(':io.typefox.examples.theia.states')
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+	
+	compile "org.eclipse.sprotty:org.eclipse.sprotty.server:${sprottyVersion}"
+	compile "org.eclipse.sprotty:org.eclipse.sprotty.xtext:${sprottyVersion}"
 }
 
 apply plugin: 'application'
-mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
+mainClassName = "io.typefox.examples.theia.states.ide.launch.StatesServerLauncher"
 applicationName = 'states-language-server'
 

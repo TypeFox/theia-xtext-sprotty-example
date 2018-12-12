@@ -7,6 +7,7 @@ import com.google.inject.Guice
 import io.typefox.examples.theia.states.StatesRuntimeModule
 import io.typefox.examples.theia.states.StatesStandaloneSetup
 import org.eclipse.xtext.util.Modules2
+import io.typefox.examples.theia.states.ide.diagram.StatesDiagramModule
 
 /**
  * Initialization support for running Xtext languages as language servers.
@@ -14,7 +15,7 @@ import org.eclipse.xtext.util.Modules2
 class StatesIdeSetup extends StatesStandaloneSetup {
 
 	override createInjector() {
-		Guice.createInjector(Modules2.mixin(new StatesRuntimeModule, new StatesIdeModule))
+		Guice.createInjector(Modules2.mixin(new StatesRuntimeModule, new StatesIdeModule, new StatesDiagramModule))
 	}
 	
 }

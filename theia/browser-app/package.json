@@ -29,7 +29,8 @@
   "scripts": {
     "prepare": "theia build --mode development",    
     "start": "theia start",
-    "watch": "theia build --watch --mode development"
+    "watch": "theia build --watch --mode development",
+    "start:debug": "node --inspect ./src-gen/backend/main.js --root-dir=../../workspace --STATES_LSP=5008 --port=3000 --loglevel=debug"
   },
   "theia": {
     "target": "browser"
