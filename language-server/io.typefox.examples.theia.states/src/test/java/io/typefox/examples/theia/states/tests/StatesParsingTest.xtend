@@ -21,7 +21,28 @@ class StatesParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			statemachine MrsGrantsSecretCompartments
+			
+			event doorClosed
+			event drawOpened
+			event lightOn
+			event panelClosed
+			
+			state active
+				lightOn	=> waitingForDraw
+				drawOpened => waitingForLight
+			
+			state idle
+				doorClosed => active
+			
+			state waitingForLight 
+				lightOn => idle
+			
+			state waitingForDraw
+				drawOpened => unlockedPanel
+			
+			state unlockedPanel
+				panelClosed => idle
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
