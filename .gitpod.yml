@@ -3,4 +3,10 @@ ports:
 tasks:
   - init: >
       cd language-server &&
-      ./gradlew build
+      ./gradlew build &&
+      cd ../theia &&
+      yarn &&
+      cd ..
+    command: >
+      cd theia/browser-app &&
+      yarn start --hostname=0.0.0.0
