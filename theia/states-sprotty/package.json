@@ -1,0 +1,22 @@
+{
+  "name": "states-sprotty",
+  "version": "0.0.0",
+  "files": [
+    "lib",
+    "src",
+    "css"
+  ],
+  "dependencies": {
+    "sprotty": "next"
+  },
+  "devDependencies": {
+    "rimraf": "latest",
+    "typescript": "latest"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib",
+    "build": "tsc",
+    "watch": "tsc -w"
+  }
+}

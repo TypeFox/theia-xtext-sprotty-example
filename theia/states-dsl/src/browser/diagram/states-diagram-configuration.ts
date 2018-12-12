@@ -1,7 +1,7 @@
 import { Container, injectable } from "inversify";
 import { DiagramConfiguration, TheiaDiagramServer, TheiaKeyTool } from "sprotty-theia/lib";
 import { KeyTool, TYPES } from 'sprotty/lib';
-import { createStateDiagramContainer } from './di.config';
+import { createStateDiagramContainer } from 'states-sprotty/lib/di.config';
 
 export const STATES_DIAGRAM_TYPE = 'states-diagram';
 
