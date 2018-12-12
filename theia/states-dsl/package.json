@@ -6,7 +6,8 @@
   "version": "0.0.0",
   "files": [
     "lib",
-    "src"
+    "src",
+    "build"
   ],
   "dependencies": {
     "@theia/core": "latest"
@@ -16,14 +17,18 @@
     "typescript": "latest"
   },
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
+    "install:languageserver": "rimraf -rf ./build && mkdir build && yarn copy:languageserver && yarn unzip:languageserver",
+    "copy:languageserver": "cp ../../language-server/io.typefox.examples.theia.states.ide/build/distributions/states-language-server.zip .",
+    "unzip:languageserver": "unzip ./states-language-server.zip -d build/",
+    "prepare": "yarn run clean && yarn install:languageserver && yarn run build",
     "clean": "rimraf lib",
     "build": "tsc",
     "watch": "tsc -w"
   },
   "theiaExtensions": [
     {
-      "frontend": "lib/browser/states-dsl-frontend-module"
+      "frontend": "lib/browser/states-dsl-frontend-module",
+      "backend": "lib/node/states-dsl-backend-module"
     }
   ]
 }

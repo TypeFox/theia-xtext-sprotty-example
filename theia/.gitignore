@@ -4,3 +4,5 @@ lib
 *.log
 *-app/*
 !*-app/package.json
+build
+states-dsl/*.zip
