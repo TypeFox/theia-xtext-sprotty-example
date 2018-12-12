@@ -1,0 +1,6 @@
+ports:
+  - port: 3000
+tasks:
+  - init: >
+      cd language-server &&
+      ./gradlew build
