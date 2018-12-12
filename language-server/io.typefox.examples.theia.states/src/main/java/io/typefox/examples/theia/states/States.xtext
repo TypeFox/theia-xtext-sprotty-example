@@ -1,0 +1,16 @@
+grammar io.typefox.examples.theia.states.States with org.eclipse.xtext.common.Terminals
+
+generate states "http://www.typefox.io/examples/theia/states/States"
+
+StateMachine:
+	'statemachine' name=ID
+	(states+=State | events+=Event)*;
+	
+State:
+	'state' name=ID transitions+=Transition*;
+	
+Event: 
+	'event' name=ID;
+	
+Transition:
+	event=[Event] '=>' state=[State];

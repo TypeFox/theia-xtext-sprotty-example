@@ -1,0 +1,2 @@
+include 'io.typefox.examples.theia.states'
+include 'io.typefox.examples.theia.states.ide'
