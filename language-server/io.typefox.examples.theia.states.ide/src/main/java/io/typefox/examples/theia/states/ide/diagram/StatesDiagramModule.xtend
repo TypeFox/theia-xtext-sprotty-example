@@ -1,5 +1,6 @@
 package io.typefox.examples.theia.states.ide.diagram
 
+import org.eclipse.sprotty.layout.ElkLayoutEngine
 import org.eclipse.sprotty.xtext.DefaultDiagramModule
 import org.eclipse.sprotty.xtext.IDiagramGenerator
 
@@ -11,5 +12,9 @@ class StatesDiagramModule extends DefaultDiagramModule {
 	
 	override bindIDiagramServerFactory() {
 		StatesDiagramServerFactory
+	}
+	
+	override bindILayoutEngine() {
+		ElkLayoutEngine
 	}
 }

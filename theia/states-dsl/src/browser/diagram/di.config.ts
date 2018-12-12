@@ -33,7 +33,7 @@ export function createStateDiagramContainer(widgetId: string): Container {
         statesDiagramModule);
     overrideViewerOptions(container, {
         needsClientLayout: true,
-        needsServerLayout: false,
+        needsServerLayout: true,
         baseDiv: widgetId
     });
     return container;
