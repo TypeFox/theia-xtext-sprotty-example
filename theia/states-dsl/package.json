@@ -11,7 +11,7 @@
     "data"
   ],
   "dependencies": {
-    "@theia/core": "latest"
+    "@theia/core": "next"
   },
   "devDependencies": {
     "rimraf": "latest",
