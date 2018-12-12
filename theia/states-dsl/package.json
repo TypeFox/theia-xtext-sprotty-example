@@ -8,10 +8,12 @@
     "lib",
     "src",
     "build",
-    "data"
+    "data", 
+    "css"
   ],
   "dependencies": {
-    "@theia/core": "next"
+    "@theia/core": "next",
+    "sprotty-theia": "next"
   },
   "devDependencies": {
     "rimraf": "latest",

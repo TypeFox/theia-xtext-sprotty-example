@@ -1,9 +1,11 @@
-import { BaseLanguageClientContribution, LanguageClientFactory, Languages, Workspace } from '@theia/languages/lib/browser';
-import { inject, injectable } from 'inversify';
+import { LanguageClientFactory, Languages, Workspace } from '@theia/languages/lib/browser';
+import { inject, injectable, multiInject } from 'inversify';
 import { STATES_LANGUAGE_SERVER_ID, STATES_LANGUAGE_SERVER_NAME, STATES_LANGUAGE_FILE_EXTENSION } from '../common';
+import { DiagramLanguageClientContribution } from 'sprotty-theia/lib/theia/languageserver';
+import { DiagramManagerProvider } from 'sprotty-theia/lib';
 
 @injectable()
-export class StatesLanguageClientContribution extends BaseLanguageClientContribution {
+export class StatesLanguageClientContribution extends DiagramLanguageClientContribution {
 
     readonly id = STATES_LANGUAGE_SERVER_ID;
     readonly name = STATES_LANGUAGE_SERVER_NAME;
@@ -11,9 +13,9 @@ export class StatesLanguageClientContribution extends BaseLanguageClientContribu
     constructor(
         @inject(Workspace) protected readonly workspace: Workspace,
         @inject(Languages) protected readonly languages: Languages,
-        @inject(LanguageClientFactory) protected readonly languageClientFactory: LanguageClientFactory
-    ) {
-        super(workspace, languages, languageClientFactory);
+        @inject(LanguageClientFactory) protected readonly languageClientFactory: LanguageClientFactory,
+        @multiInject(DiagramManagerProvider) protected diagramManagerProviders: DiagramManagerProvider[]) {
+        super(workspace, languages, languageClientFactory, diagramManagerProviders)
     }
 
     protected get globPatterns(): string[] {
