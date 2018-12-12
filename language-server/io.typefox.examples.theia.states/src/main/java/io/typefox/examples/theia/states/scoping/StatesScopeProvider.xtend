@@ -3,6 +3,13 @@
  */
 package io.typefox.examples.theia.states.scoping
 
+import io.typefox.examples.theia.states.states.StateMachine
+import io.typefox.examples.theia.states.states.StatesPackage
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.scoping.Scopes
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
  * This class contains custom scoping description.
@@ -12,4 +19,13 @@ package io.typefox.examples.theia.states.scoping
  */
 class StatesScopeProvider extends AbstractStatesScopeProvider {
 
+	override getScope(EObject context, EReference reference) {
+		if (reference == StatesPackage.Literals.TRANSITION__EVENT) {
+			return Scopes.scopeFor(context.getContainerOfType(StateMachine)?.events ?: emptyList)
+		}
+		if (reference == StatesPackage.Literals.TRANSITION__STATE) {
+			return Scopes.scopeFor(context.getContainerOfType(StateMachine)?.states ?: emptyList)
+		}
+		super.getScope(context, reference)
+	}
 }
