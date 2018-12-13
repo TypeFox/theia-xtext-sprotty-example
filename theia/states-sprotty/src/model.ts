@@ -1,5 +1,5 @@
 import { hoverFeedbackFeature, popupFeature, SChildElement, SEdge, SGraph, SGraphFactory, SModelElementSchema, 
-    SParentElement, CircularPort, CreatingOnDrag, Action, CreateElementAction, creatingOnDragFeature, RectangularNode, Routable } from "sprotty/lib";
+    SParentElement, CircularPort, CreatingOnDrag, Action, CreateElementAction, creatingOnDragFeature, RectangularNode, Routable, editLabelFeature, SLabel, EditableLabel } from "sprotty/lib";
 
 export class StatesModelFactory extends SGraphFactory {
 
@@ -35,3 +35,8 @@ export class CreateTransitionPort extends CircularPort implements CreatingOnDrag
     }
 }
 
+export class StatesLabel extends SLabel implements EditableLabel {
+    hasFeature(feature: symbol): boolean {
+        return feature === editLabelFeature || super.hasFeature(feature);
+    }
+}

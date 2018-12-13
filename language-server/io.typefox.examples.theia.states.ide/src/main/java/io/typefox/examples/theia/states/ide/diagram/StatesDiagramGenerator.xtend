@@ -68,7 +68,7 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 			children = #[
 				(new SLabel [
 					id = idCache.uniqueId(theId + '.label')
-					type = 'label'
+					type = 'label:xref'
 					text = transition.event.name
 				]).trace(transition, StatesPackage.Literals.TRANSITION__EVENT, -1)
 			]

@@ -4,11 +4,11 @@ import 'sprotty/css/sprotty.css';
 import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defaultModule, expandModule, 
     exportModule, fadeModule, hoverModule, HtmlRoot, HtmlRootView, LogLevel, modelSourceModule, moveModule, 
     openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
-    selectModule, SGraphView, SLabel, SLabelView, TYPES, undoRedoModule, viewportModule, decorationModule, 
-    SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView, CreateElementCommand } from 'sprotty/lib';
+    selectModule, SGraphView, SLabelView, TYPES, undoRedoModule, viewportModule, decorationModule, 
+    SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView, CreateElementCommand, labelEditModule } from 'sprotty/lib';
 import "../css/diagram.css";
 import { PolylineArrowEdgeView, TriangleButtonView } from "./views";
-import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort } from "./model";
+import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort, StatesLabel } from "./model";
 
 const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
@@ -18,7 +18,8 @@ const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) 
     const context = { bind, unbind, isBound, rebind };
     configureModelElement(context, 'graph', StatesDiagram, SGraphView);
     configureModelElement(context, 'node', StatesNode, RectangularNodeView);
-    configureModelElement(context, 'label', SLabel, SLabelView);
+    configureModelElement(context, 'label', StatesLabel, SLabelView);
+    configureModelElement(context, 'label:xref', StatesLabel, SLabelView);
     configureModelElement(context, 'edge', SEdge, PolylineArrowEdgeView);
     configureModelElement(context, 'html', HtmlRoot, HtmlRootView);
     configureModelElement(context, 'pre-rendered', PreRenderedElement, PreRenderedView);
@@ -34,7 +35,7 @@ export function createStateDiagramContainer(widgetId: string): Container {
     const container = new Container();
     container.load(defaultModule, selectModule, moveModule, boundsModule, undoRedoModule, viewportModule,
         hoverModule, fadeModule, exportModule, expandModule, openModule, buttonModule, modelSourceModule,
-        decorationModule, edgeEditModule, statesDiagramModule);
+        decorationModule, edgeEditModule, labelEditModule, statesDiagramModule);
     overrideViewerOptions(container, {
         needsClientLayout: true,
         needsServerLayout: true,
