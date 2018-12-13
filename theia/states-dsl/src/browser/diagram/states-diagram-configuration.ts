@@ -1,6 +1,6 @@
 import { Container, injectable } from "inversify";
 import { DiagramConfiguration, TheiaDiagramServer, TheiaKeyTool, IRootPopupModelProvider, TheiaDiagramServerProvider } from "sprotty-theia/lib";
-import { CodeActionProvider, PaletteMouseListener, CodeActionPalettePopupProvider, PaletteButton } from "sprotty-theia/lib/sprotty/languageserver";
+import { CodeActionProvider, PaletteMouseListener, CodeActionPalettePopupProvider, PaletteButton, DeleteWithWorkspaceEditCommand } from "sprotty-theia/lib/sprotty/languageserver";
 import { KeyTool, TYPES } from 'sprotty/lib';
 import { createStateDiagramContainer } from 'states-sprotty/lib/di.config';
 import { PaletteButtonView } from 'states-sprotty/lib/html-views';
@@ -36,6 +36,8 @@ export class StatesDiagramConfiguration implements DiagramConfiguration {
         container.bind(TYPES.ViewRegistration).toConstantValue({
             type: 'button:create', constr: PaletteButtonView
         });
+        
+        container.bind(TYPES.ICommand).toConstructor(DeleteWithWorkspaceEditCommand);
 
         return container;
     }
