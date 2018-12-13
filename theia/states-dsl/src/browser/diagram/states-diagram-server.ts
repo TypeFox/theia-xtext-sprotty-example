@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { TheiaDiagramServer } from "sprotty-theia/lib";
 import { WorkspaceEditAction, WorkspaceEditCommand } from "sprotty-theia/lib/sprotty/languageserver";
-import { Action, ActionHandlerRegistry, IActionDispatcher, ICommand, ILogger, SModelStorage, TYPES, ViewerOptions } from "sprotty/lib";
+import { Action, ActionHandlerRegistry, IActionDispatcher, ICommand, ILogger, SModelStorage, TYPES, ViewerOptions, ReconnectCommand } from "sprotty/lib";
 
 @injectable()
 export class StatesDiagramServer extends TheiaDiagramServer {
@@ -17,6 +17,7 @@ export class StatesDiagramServer extends TheiaDiagramServer {
     initialize(registry: ActionHandlerRegistry) {
         super.initialize(registry);
         registry.register(WorkspaceEditCommand.KIND, this);
+        registry.register(ReconnectCommand.KIND, this);
     }
 
     handle(action: Action): void | ICommand {

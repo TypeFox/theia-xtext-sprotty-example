@@ -15,3 +15,9 @@ export class StatesDiagram extends SGraph {
         return feature === hoverFeedbackFeature || feature === popupFeature || super.hasFeature(feature);
     }
 }
+
+export class StatesNode extends RectangularNode {
+    canConnect(routable: Routable, role: string) {
+        return true;
+    }
+}
