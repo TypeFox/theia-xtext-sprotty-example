@@ -1,4 +1,4 @@
-import { SGraphFactory, SChildElement, SModelElementSchema, SParentElement, SEdge } from "sprotty/lib";
+import { SGraphFactory, SChildElement, SModelElementSchema, SParentElement, SEdge, SGraph, hoverFeedbackFeature, popupFeature } from "sprotty/lib";
 
 export class StatesModelFactory extends SGraphFactory {
 
@@ -7,5 +7,11 @@ export class StatesModelFactory extends SGraphFactory {
         if (child instanceof SEdge)
             child.targetAnchorCorrection = Math.sqrt(5)
         return child
+    }
+}
+
+export class StatesDiagram extends SGraph {
+    hasFeature(feature: symbol): boolean {
+        return feature === hoverFeedbackFeature || feature === popupFeature || super.hasFeature(feature);
     }
 }

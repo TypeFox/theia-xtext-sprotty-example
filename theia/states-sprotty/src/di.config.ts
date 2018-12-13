@@ -4,12 +4,11 @@ import 'sprotty/css/sprotty.css';
 import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defaultModule, expandModule, 
     exportModule, fadeModule, hoverModule, HtmlRoot, HtmlRootView, LogLevel, modelSourceModule, moveModule, 
     openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
-    selectModule, SGraph, SGraphView, SLabel, SLabelView, TYPES, undoRedoModule, viewportModule, 
-    RectangularNode, 
-    decorationModule} from 'sprotty/lib';
+    selectModule, SGraphView, SLabel, SLabelView, TYPES, undoRedoModule, viewportModule, RectangularNode, 
+    decorationModule, SModelRoot} from 'sprotty/lib';
 import "../css/diagram.css";
 import { PolylineArrowEdgeView } from "./views";
-import { StatesModelFactory } from "./model";
+import { StatesModelFactory, StatesDiagram } from "./model";
 
 const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
@@ -17,12 +16,13 @@ const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) 
     rebind(TYPES.IModelFactory).to(StatesModelFactory);
 
     const context = { bind, unbind, isBound, rebind };
-    configureModelElement(context, 'graph', SGraph, SGraphView);
+    configureModelElement(context, 'graph', StatesDiagram, SGraphView);
     configureModelElement(context, 'node', RectangularNode, RectangularNodeView);
     configureModelElement(context, 'label', SLabel, SLabelView);
     configureModelElement(context, 'edge', SEdge, PolylineArrowEdgeView);
     configureModelElement(context, 'html', HtmlRoot, HtmlRootView);
     configureModelElement(context, 'pre-rendered', PreRenderedElement, PreRenderedView);
+    configureModelElement(context, 'palette', SModelRoot, HtmlRootView);
 });
 
 export function createStateDiagramContainer(widgetId: string): Container {
