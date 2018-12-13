@@ -5,7 +5,8 @@ import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defau
     exportModule, fadeModule, hoverModule, HtmlRoot, HtmlRootView, LogLevel, modelSourceModule, moveModule, 
     openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
     selectModule, SGraph, SGraphView, SLabel, SLabelView, TYPES, undoRedoModule, viewportModule, 
-    RectangularNode } from 'sprotty/lib';
+    RectangularNode, 
+    decorationModule} from 'sprotty/lib';
 import "../css/diagram.css";
 import { PolylineArrowEdgeView } from "./views";
 import { StatesModelFactory } from "./model";
@@ -28,7 +29,7 @@ export function createStateDiagramContainer(widgetId: string): Container {
     const container = new Container();
     container.load(defaultModule, selectModule, moveModule, boundsModule, undoRedoModule, viewportModule,
         hoverModule, fadeModule, exportModule, expandModule, openModule, buttonModule, modelSourceModule,
-        statesDiagramModule);
+        decorationModule, statesDiagramModule);
     overrideViewerOptions(container, {
         needsClientLayout: true,
         needsServerLayout: true,

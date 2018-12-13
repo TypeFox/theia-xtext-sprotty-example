@@ -3,42 +3,46 @@ package io.typefox.examples.theia.states.ide.diagram
 import com.google.inject.Inject
 import io.typefox.examples.theia.states.states.State
 import io.typefox.examples.theia.states.states.StateMachine
+import io.typefox.examples.theia.states.states.StatesPackage
 import io.typefox.examples.theia.states.states.Transition
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.sprotty.LayoutOptions
 import org.eclipse.sprotty.SEdge
 import org.eclipse.sprotty.SGraph
 import org.eclipse.sprotty.SLabel
+import org.eclipse.sprotty.SModelElement
 import org.eclipse.sprotty.SNode
 import org.eclipse.sprotty.xtext.IDiagramGenerator
+import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
-import io.typefox.examples.theia.states.states.StatesPackage
 
 class StatesDiagramGenerator implements IDiagramGenerator {
 	
 	@Inject extension ITraceProvider
+	@Inject extension SIssueMarkerDecorator
 	
 	override generate(Context context) {
 		(context.resource.contents.head as StateMachine).toSGraph(context)
 	}
 	
 	def toSGraph(StateMachine sm, extension Context context) {
-		new SGraph [
+		(new SGraph [
 			id = idCache.uniqueId(sm, sm.name)
 			children = (sm.states.map[toSNode(context)] 
 					  + sm.states.map[transitions].flatten.map[toSEdge(context)]
 			).toList 
-		].trace(sm)
+		]).traceAndMark(sm, context)
 	}
 	
 	def SNode toSNode(State state, extension Context context) {
 		val theId = idCache.uniqueId(state, state.name) 
-		new SNode [
+		(new SNode [
 			id = theId
 			children =  #[
-				new SLabel [
+				(new SLabel [
 					id = idCache.uniqueId(theId + '.label')
 					text = state.name 
-				]
+				]).trace(state)
 			]
 			layout = 'stack'
 			layoutOptions = new LayoutOptions [
@@ -48,22 +52,26 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 				paddingRight = 10.0
 				
 			]
-		].trace(state)
+		]).traceAndMark(state, context)
 	}
 	
 	def SEdge toSEdge(Transition transition, extension Context context) {
-		new SEdge [
+		(new SEdge [
 			sourceId = idCache.getId(transition.eContainer) 
 			targetId = idCache.getId(transition.state)
 			val theId = idCache.uniqueId(transition, sourceId + ':' + transition.event.name + ':' + targetId)
 			id = theId 
 			children = #[
-				new SLabel [
+				(new SLabel [
 					id = idCache.uniqueId(theId + '.label')
 					type = 'label'
 					text = transition.event.name
-				].trace(transition, StatesPackage.Literals.TRANSITION__EVENT, -1)
+				]).trace(transition, StatesPackage.Literals.TRANSITION__EVENT, -1)
 			]
-		].trace(transition)
+		]).traceAndMark(transition, context)
+	}
+	
+	def <T extends SModelElement> T traceAndMark(T sElement, EObject element, Context context) {
+		sElement.trace(element).addIssueMarkers(element, context) 
 	}
 }
