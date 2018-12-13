@@ -5,10 +5,10 @@ import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defau
     exportModule, fadeModule, hoverModule, HtmlRoot, HtmlRootView, LogLevel, modelSourceModule, moveModule, 
     openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
     selectModule, SGraphView, SLabel, SLabelView, TYPES, undoRedoModule, viewportModule, decorationModule, 
-    SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView } from 'sprotty/lib';
+    SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView, CreateElementCommand } from 'sprotty/lib';
 import "../css/diagram.css";
-import { PolylineArrowEdgeView } from "./views";
-import { StatesModelFactory, StatesDiagram, StatesNode } from "./model";
+import { PolylineArrowEdgeView, TriangleButtonView } from "./views";
+import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort } from "./model";
 
 const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
@@ -25,6 +25,9 @@ const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) 
     configureModelElement(context, 'palette', SModelRoot, HtmlRootView);
     configureModelElement(context, 'routing-point', SRoutingHandle, SRoutingHandleView);
     configureModelElement(context, 'volatile-routing-point', SRoutingHandle, SRoutingHandleView);
+    configureModelElement(context, 'port', CreateTransitionPort, TriangleButtonView)
+
+    bind(TYPES.ICommand).toConstructor(CreateElementCommand);
 });
 
 export function createStateDiagramContainer(widgetId: string): Container {

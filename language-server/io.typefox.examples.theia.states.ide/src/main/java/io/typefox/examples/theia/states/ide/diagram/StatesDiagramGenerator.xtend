@@ -12,6 +12,7 @@ import org.eclipse.sprotty.SGraph
 import org.eclipse.sprotty.SLabel
 import org.eclipse.sprotty.SModelElement
 import org.eclipse.sprotty.SNode
+import org.eclipse.sprotty.SPort
 import org.eclipse.sprotty.xtext.IDiagramGenerator
 import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
@@ -42,7 +43,10 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 				(new SLabel [
 					id = idCache.uniqueId(theId + '.label')
 					text = state.name 
-				]).trace(state)
+				]).trace(state),
+				new SPort [
+					id = idCache.uniqueId(theId + '.newTransition')
+				]				
 			]
 			layout = 'stack'
 			layoutOptions = new LayoutOptions [

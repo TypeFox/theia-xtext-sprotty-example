@@ -1,4 +1,5 @@
-import { SGraphFactory, SChildElement, SModelElementSchema, SParentElement, SEdge, SGraph, hoverFeedbackFeature, popupFeature } from "sprotty/lib";
+import { hoverFeedbackFeature, popupFeature, SChildElement, SEdge, SGraph, SGraphFactory, SModelElementSchema, 
+    SParentElement, CircularPort, CreatingOnDrag, Action, CreateElementAction, creatingOnDragFeature, RectangularNode, Routable } from "sprotty/lib";
 
 export class StatesModelFactory extends SGraphFactory {
 
@@ -21,3 +22,16 @@ export class StatesNode extends RectangularNode {
         return true;
     }
 }
+
+export class CreateTransitionPort extends CircularPort implements CreatingOnDrag {
+    createAction(id: string): Action {
+        return new CreateElementAction(this.root.id, <SModelElementSchema> {
+            id, type: 'edge', sourceId: this.parent.id, targetId: this.id
+        });
+    }
+
+    hasFeature(feature: symbol): boolean {
+        return feature === popupFeature || feature === creatingOnDragFeature || super.hasFeature(feature);
+    }
+}
+
