@@ -1,5 +1,6 @@
 package io.typefox.examples.theia.states.ide.diagram
 
+import com.google.inject.Inject
 import io.typefox.examples.theia.states.states.State
 import io.typefox.examples.theia.states.states.StateMachine
 import io.typefox.examples.theia.states.states.Transition
@@ -9,8 +10,12 @@ import org.eclipse.sprotty.SGraph
 import org.eclipse.sprotty.SLabel
 import org.eclipse.sprotty.SNode
 import org.eclipse.sprotty.xtext.IDiagramGenerator
+import org.eclipse.sprotty.xtext.tracing.ITraceProvider
+import io.typefox.examples.theia.states.states.StatesPackage
 
 class StatesDiagramGenerator implements IDiagramGenerator {
+	
+	@Inject extension ITraceProvider
 	
 	override generate(Context context) {
 		(context.resource.contents.head as StateMachine).toSGraph(context)
@@ -22,7 +27,7 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 			children = (sm.states.map[toSNode(context)] 
 					  + sm.states.map[transitions].flatten.map[toSEdge(context)]
 			).toList 
-		]
+		].trace(sm)
 	}
 	
 	def SNode toSNode(State state, extension Context context) {
@@ -43,7 +48,7 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 				paddingRight = 10.0
 				
 			]
-		]
+		].trace(state)
 	}
 	
 	def SEdge toSEdge(Transition transition, extension Context context) {
@@ -57,8 +62,8 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 					id = idCache.uniqueId(theId + '.label')
 					type = 'label'
 					text = transition.event.name
-				]
+				].trace(transition, StatesPackage.Literals.TRANSITION__EVENT, -1)
 			]
-		]
+		].trace(transition)
 	}
 }
