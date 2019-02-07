@@ -1,6 +1,8 @@
 import { hoverFeedbackFeature, popupFeature, SChildElement, SEdge, SGraph, SGraphFactory, SModelElementSchema, 
     SParentElement, CircularPort, CreatingOnDrag, Action, CreateElementAction, creatingOnDragFeature, RectangularNode, Routable, editLabelFeature, SLabel, EditableLabel } from "sprotty/lib";
+import { injectable } from "inversify";
 
+@injectable()
 export class StatesModelFactory extends SGraphFactory {
 
     protected initializeChild(child: SChildElement, schema: SModelElementSchema, parent?: SParentElement): SChildElement {

@@ -1,7 +1,7 @@
 import { Container, injectable } from "inversify";
-import { DiagramConfiguration, TheiaDiagramServer, TheiaKeyTool, IRootPopupModelProvider, TheiaDiagramServerProvider } from "sprotty-theia/lib";
-import { CodeActionProvider, PaletteMouseListener, CodeActionPalettePopupProvider, PaletteButton, DeleteWithWorkspaceEditCommand, CompletionLabelEditor, RenameLabelEditor } from "sprotty-theia/lib/sprotty/languageserver";
-import { KeyTool, TYPES } from 'sprotty/lib';
+import { DiagramConfiguration, IRootPopupModelProvider, TheiaDiagramServer, TheiaDiagramServerProvider, TheiaKeyTool } from "sprotty-theia/lib";
+import { CodeActionPalettePopupProvider, CodeActionProvider, CompletionLabelEditor, DeleteWithWorkspaceEditCommand, PaletteButton, PaletteMouseListener, RenameLabelEditor, WorkspaceEditCommand } from "sprotty-theia/lib/sprotty/languageserver";
+import { configureCommand, KeyTool, TYPES, configureModelElement } from 'sprotty/lib';
 import { createStateDiagramContainer } from 'states-sprotty/lib/di.config';
 import { PaletteButtonView } from 'states-sprotty/lib/html-views';
 import { StatesDiagramServer } from "./states-diagram-server";
@@ -30,14 +30,10 @@ export class StatesDiagramConfiguration implements DiagramConfiguration {
         container.bind(IRootPopupModelProvider).to(CodeActionPalettePopupProvider).inSingletonScope();
         container.bind(PaletteMouseListener).toSelf().inSingletonScope();
         container.rebind(TYPES.PopupMouseListener).to(PaletteMouseListener);
-        container.bind(TYPES.SModelElementRegistration).toConstantValue({
-            type: 'button:create', constr: PaletteButton
-        });
-        container.bind(TYPES.ViewRegistration).toConstantValue({
-            type: 'button:create', constr: PaletteButtonView
-        });
+        configureModelElement(container, 'button:create', PaletteButton, PaletteButtonView);
         
-        container.bind(TYPES.ICommand).toConstructor(DeleteWithWorkspaceEditCommand);
+        configureCommand(container, DeleteWithWorkspaceEditCommand);
+        configureCommand(container, WorkspaceEditCommand);
 
         container.bind(CompletionLabelEditor).toSelf().inSingletonScope();
         container.bind(RenameLabelEditor).toSelf().inSingletonScope();
