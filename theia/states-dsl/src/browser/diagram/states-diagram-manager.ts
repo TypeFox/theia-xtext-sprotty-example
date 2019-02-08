@@ -5,6 +5,7 @@ import { DiagramManager, TheiaFileSaver, TheiaSprottyConnector } from 'sprotty-t
 import { STATES_DIAGRAM_TYPE } from './states-diagram-configuration';
 import { StatesDiagramLanguageClient } from './states-diagram-language-client';
 import { EditorManager } from '@theia/editor/lib/browser';
+import { LSTheiaSprottyConnector } from 'sprotty-theia/lib/sprotty/languageserver';
 
 @injectable()
 export class StatesDiagramManager extends DiagramManager {
@@ -21,7 +22,7 @@ export class StatesDiagramManager extends DiagramManager {
                 @inject(Workspace) workspace: Workspace,
                 @inject(QuickPickService) quickPickService: QuickPickService) {
         super();
-        this._diagramConnector = new TheiaSprottyConnector({diagramLanguageClient, fileSaver, editorManager, widgetManager, workspace, quickPickService, diagramManager: this});
+        this._diagramConnector = new LSTheiaSprottyConnector({diagramLanguageClient, fileSaver, editorManager, widgetManager, workspace, quickPickService, diagramManager: this});
     }
 
     get diagramConnector() {

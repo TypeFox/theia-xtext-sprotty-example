@@ -1,6 +1,6 @@
 import { Container, injectable } from "inversify";
-import { DiagramConfiguration, IRootPopupModelProvider, TheiaDiagramServer, TheiaDiagramServerProvider, TheiaKeyTool } from "sprotty-theia/lib";
-import { CodeActionPalettePopupProvider, CodeActionProvider, CompletionLabelEditor, DeleteWithWorkspaceEditCommand, PaletteButton, PaletteMouseListener, RenameLabelEditor, WorkspaceEditCommand } from "sprotty-theia/lib/sprotty/languageserver";
+import { DiagramConfiguration, IRootPopupModelProvider, TheiaDiagramServer, TheiaKeyTool } from "sprotty-theia/lib";
+import { CodeActionPalettePopupProvider, CodeActionProvider, CompletionLabelEditor, DeleteWithWorkspaceEditCommand, PaletteButton, PaletteMouseListener, RenameLabelEditor, WorkspaceEditCommand, LSTheiaDiagramServerProvider, LSTheiaDiagramServer } from "sprotty-theia/lib/sprotty/languageserver";
 import { configureCommand, KeyTool, TYPES, configureModelElement } from 'sprotty/lib';
 import { createStateDiagramContainer } from 'states-sprotty/lib/di.config';
 import { PaletteButtonView } from 'states-sprotty/lib/html-views';
@@ -16,13 +16,14 @@ export class StatesDiagramConfiguration implements DiagramConfiguration {
         const container = createStateDiagramContainer(widgetId);
         container.bind(StatesDiagramServer).toSelf().inSingletonScope();
         container.bind(TheiaDiagramServer).toService(StatesDiagramServer);
+        container.bind(LSTheiaDiagramServer).toService(StatesDiagramServer);
         container.bind(TYPES.ModelSource).toService(TheiaDiagramServer);
         container.rebind(KeyTool).to(TheiaKeyTool).inSingletonScope();
 
-        container.bind(TheiaDiagramServerProvider).toProvider<TheiaDiagramServer>((context) => {
+        container.bind(LSTheiaDiagramServerProvider).toProvider<LSTheiaDiagramServer>((context) => {
             return () => {
-                return new Promise<TheiaDiagramServer>((resolve) => {
-                    resolve(context.container.get(TheiaDiagramServer));
+                return new Promise<LSTheiaDiagramServer>((resolve) => {
+                    resolve(context.container.get(LSTheiaDiagramServer));
                 });
             };
         });
