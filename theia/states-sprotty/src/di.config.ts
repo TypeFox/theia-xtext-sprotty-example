@@ -6,15 +6,18 @@ import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defau
     openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
     selectModule, SGraphView, SLabelView, TYPES, undoRedoModule, viewportModule, decorationModule, 
     SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView, CreateElementCommand, labelEditModule, 
-    configureCommand, updateModule } from 'sprotty/lib';
+    configureCommand, updateModule, routingModule, ManhattanEdgeRouter, edgeLayoutModule } from 'sprotty';
 import "../css/diagram.css";
 import { PolylineArrowEdgeView, TriangleButtonView } from "./views";
 import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort, StatesLabel } from "./model";
+import { CustomRouter } from "./custom-edge-router";
 
 const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
     rebind(TYPES.LogLevel).toConstantValue(LogLevel.warn);
     rebind(TYPES.IModelFactory).to(StatesModelFactory);
+    unbind(ManhattanEdgeRouter);
+    bind(ManhattanEdgeRouter).to(CustomRouter).inSingletonScope();
 
     const context = { bind, unbind, isBound, rebind };
     configureModelElement(context, 'graph', StatesDiagram, SGraphView);
@@ -36,7 +39,8 @@ export function createStateDiagramContainer(widgetId: string): Container {
     const container = new Container();
     container.load(defaultModule, selectModule, moveModule, boundsModule, undoRedoModule, viewportModule,
         hoverModule, fadeModule, exportModule, expandModule, openModule, buttonModule, modelSourceModule,
-        decorationModule, edgeEditModule, labelEditModule, updateModule, statesDiagramModule);
+        decorationModule, edgeEditModule, edgeLayoutModule, labelEditModule, updateModule, routingModule,
+        statesDiagramModule);
     overrideViewerOptions(container, {
         needsClientLayout: true,
         needsServerLayout: true,

@@ -2,7 +2,7 @@
 import { svg } from 'snabbdom-jsx';
 
 import { VNode } from "snabbdom/vnode";
-import { Point, PolylineEdgeView, RenderingContext, SEdge, toDegrees, IView, SPort } from "sprotty/lib";
+import { Point, PolylineEdgeView, RenderingContext, SEdge, toDegrees, IView, SPort } from "sprotty";
 import { injectable } from 'inversify';
 
 @injectable()
