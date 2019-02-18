@@ -1,11 +1,10 @@
 import { QuickPickService, WidgetManager } from '@theia/core/lib/browser';
+import { EditorManager } from '@theia/editor/lib/browser';
 import { Workspace } from '@theia/languages/lib/browser';
 import { inject, injectable } from 'inversify';
-import { DiagramManager, TheiaFileSaver, TheiaSprottyConnector } from 'sprotty-theia/lib';
+import { DiagramManager, LSTheiaSprottyConnector, TheiaFileSaver, TheiaSprottyConnector } from 'sprotty-theia';
 import { STATES_DIAGRAM_TYPE } from './states-diagram-configuration';
 import { StatesDiagramLanguageClient } from './states-diagram-language-client';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { LSTheiaSprottyConnector } from 'sprotty-theia/lib/sprotty/languageserver';
 
 @injectable()
 export class StatesDiagramManager extends DiagramManager {

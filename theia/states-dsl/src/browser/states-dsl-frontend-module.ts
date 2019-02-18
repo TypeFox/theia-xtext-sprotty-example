@@ -2,23 +2,19 @@
  * Generated using theia-extension-generator
  */
 
-import { StatesDslCommandContribution, StatesDslMenuContribution } from './states-dsl-contribution';
-import {
-    CommandContribution,
-    MenuContribution
-} from "@theia/core/lib/common";
-
-import { ContainerModule } from "inversify";
+import { FrontendApplicationContribution, KeybindingContribution, OpenHandler, WidgetFactory } from '@theia/core/lib/browser';
+import { CommandContribution, MenuContribution } from "@theia/core/lib/common";
 import { LanguageClientContribution } from '@theia/languages/lib/browser';
-import { StatesLanguageClientContribution } from './states-dsl-language-client-contribution';
 import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
-import { StatesGrammarContribution } from './states-dsl-grammar-contribution';
-import { DiagramConfiguration, DiagramManagerProvider, DiagramManager } from 'sprotty-theia/lib';
+import { ContainerModule } from "inversify";
+import { DiagramConfiguration, DiagramManager, DiagramManagerProvider, LSDiagramCommandContribution, 
+    LSDiagramKeybindingContribution } from 'sprotty-theia';
 import { StatesDiagramConfiguration } from './diagram/states-diagram-configuration';
-import { StatesDiagramManager } from './diagram/states-diagram-manager';
-import { FrontendApplicationContribution, OpenHandler, KeybindingContribution, WidgetFactory } from '@theia/core/lib/browser';
-import { LSDiagramCommandContribution, LSDiagramKeybindingContribution } from 'sprotty-theia/lib/theia/languageserver';
 import { StatesDiagramLanguageClient } from './diagram/states-diagram-language-client';
+import { StatesDiagramManager } from './diagram/states-diagram-manager';
+import { StatesDslCommandContribution, StatesDslMenuContribution } from './states-dsl-contribution';
+import { StatesGrammarContribution } from './states-dsl-grammar-contribution';
+import { StatesLanguageClientContribution } from './states-dsl-language-client-contribution';
 
 export default new ContainerModule(bind => {
     // add your contribution bindings here

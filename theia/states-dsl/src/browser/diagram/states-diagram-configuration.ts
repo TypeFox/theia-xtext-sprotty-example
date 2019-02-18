@@ -1,7 +1,9 @@
 import { Container, injectable } from "inversify";
-import { DiagramConfiguration, IRootPopupModelProvider, TheiaDiagramServer, TheiaKeyTool } from "sprotty-theia/lib";
-import { CodeActionPalettePopupProvider, CodeActionProvider, CompletionLabelEditor, DeleteWithWorkspaceEditCommand, PaletteButton, PaletteMouseListener, RenameLabelEditor, WorkspaceEditCommand, LSTheiaDiagramServerProvider, LSTheiaDiagramServer } from "sprotty-theia/lib/sprotty/languageserver";
-import { configureCommand, KeyTool, TYPES, configureModelElement } from 'sprotty';
+import { configureCommand, configureModelElement, KeyTool, TYPES } from 'sprotty';
+import { CodeActionPalettePopupProvider, CodeActionProvider, CompletionLabelEditor, 
+    DeleteWithWorkspaceEditCommand, DiagramConfiguration, IRootPopupModelProvider, 
+    LSTheiaDiagramServer, LSTheiaDiagramServerProvider, PaletteButton, PaletteMouseListener, 
+    RenameLabelEditor, TheiaDiagramServer, TheiaKeyTool, WorkspaceEditCommand } from "sprotty-theia";
 import { createStateDiagramContainer } from 'states-sprotty/lib/di.config';
 import { PaletteButtonView } from 'states-sprotty/lib/html-views';
 import { StatesDiagramServer } from "./states-diagram-server";

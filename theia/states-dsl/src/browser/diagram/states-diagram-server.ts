@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import { CompletionLabelEditor, isTraceable, LSTheiaDiagramServer, RenameLabelEditor } from "sprotty-theia/lib/sprotty/languageserver";
+import { CompletionLabelEditor, isTraceable, LSTheiaDiagramServer, RenameLabelEditor } from "sprotty-theia";
 import { Action, ActionHandlerRegistry, EditLabelAction, getSubType, IModelFactory, ReconnectCommand, 
     SLabel, SModelRoot, TYPES } from "sprotty";
 

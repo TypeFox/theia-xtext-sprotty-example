@@ -1,8 +1,7 @@
 import { LanguageClientFactory, Languages, Workspace } from '@theia/languages/lib/browser';
 import { inject, injectable, multiInject } from 'inversify';
-import { STATES_LANGUAGE_SERVER_ID, STATES_LANGUAGE_SERVER_NAME, STATES_LANGUAGE_FILE_EXTENSION } from '../common';
-import { DiagramLanguageClientContribution } from 'sprotty-theia/lib/theia/languageserver';
-import { DiagramManagerProvider } from 'sprotty-theia/lib';
+import { DiagramLanguageClientContribution, DiagramManagerProvider } from 'sprotty-theia';
+import { STATES_LANGUAGE_FILE_EXTENSION, STATES_LANGUAGE_SERVER_ID, STATES_LANGUAGE_SERVER_NAME } from '../common';
 
 @injectable()
 export class StatesLanguageClientContribution extends DiagramLanguageClientContribution {
