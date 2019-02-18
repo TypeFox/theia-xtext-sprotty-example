@@ -28,11 +28,11 @@ export class StatesLanguageServerContribution extends BaseLanguageServerContribu
         let socketPort = this.getPort();
         if (socketPort) {
             const socket = new net.Socket();
+            socket.connect(socketPort);
             const serverConnection = createSocketConnection(socket, socket, () => {
                 socket.destroy();
             });
             this.forward(clientConnection, serverConnection);
-            socket.connect(socketPort);
         } else {
             const args: string[] = [];
             const serverConnection = this.createProcessStreamConnection(EXECUTABLE_PATH, args);
