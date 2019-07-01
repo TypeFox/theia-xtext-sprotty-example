@@ -30,7 +30,7 @@ We create a new Xtext project, add a grammar for a statemachine DSL, and run the
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#snapshot/9ec04679-b63e-4093-8650-f1baa4283a8d)
 
-We use a [yeoman generator](https://github.com/theia-ide/generator-theia-extension) to create the skeleton for a theia-app with a custom extension. We turn the latter into a language extension for our DSL by copying the LS from the last stage, adding a grammar for highighting and a bit of glue code. At the end of this stage, our IDE supports the textual statemachine language. Thanks to Xtext's, it already offers validation, content assist, hovers, navigation of references, etc.
+We use a [yeoman generator](https://github.com/theia-ide/generator-theia-extension) to create the skeleton for a theia-app with a custom extension. We turn the latter into a language extension for our DSL by copying the LS from the last stage, adding a grammar for highlighting and a bit of glue code. At the end of this stage, our IDE supports the textual statemachine language. Thanks to Xtext's, it already offers validation, content assist, hovers, navigation of references, etc.
 
 ### Stage 3: Add Live-Diagrams for the DSL with Sprotty
 
@@ -50,14 +50,14 @@ Note that the editing features of Sprotty are still in beta.
 
 ### Gitpod
 
-[Gitpod](https://www.gitpod.io) is a cloud IDE that is based on Theia as well. Gitpod allows to experiment with the contents of this repositiory without installing anything on your local machine.
+[Gitpod](https://www.gitpod.io) is a cloud IDE that is based on Theia as well. Gitpod allows to experiment with the contents of this repository without installing anything on your local machine.
 
 The buttons above open the respective stage in Gitpod. To run it, wait for the build to finish and then click on the Open Browser button. An example workspace is opened in a new browser tab.
 
 ### Local
 
-To build the example locally, you need
-* node 8.x
+To build the example locally, [you need](https://github.com/theia-ide/theia/blob/master/doc/Developing.md#prerequisites)
+* node >= 10.x, < 12.x
 * yarn > 1.3
 * Java > 1.8
 
@@ -78,7 +78,20 @@ and point your browser to localhost:3000.
 
 Alternatively, run the electron app by running
 ```bash
-yarn rebuid:electron
+yarn rebuild:electron
 cd electron-app
 yarn start
+```
+
+### Troubleshooting:
+
+Note, this example application is _single-sourced_. Whenever you want to switch between the electron and the browser-based applications, you have to rebuild it manually.
+When switching to the electron, change the directory to `theia` and run the following:
+```bash
+yarn rebuild:electron
+```
+
+If you want to use the browser-based application, rebuild it for the browser from the `theia` folder:
+```bash
+yarn rebuild:browser
 ```
