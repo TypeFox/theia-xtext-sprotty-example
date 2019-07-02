@@ -16,13 +16,15 @@
     "states-sprotty": "0.0.0"
   },
   "devDependencies": {
+    "cpr": "latest",
+    "cross-zip-cli": "latest",
     "rimraf": "latest",
     "typescript": "latest"
   },
   "scripts": {
     "install:languageserver": "rimraf -rf ./build && mkdir build && yarn copy:languageserver && yarn unzip:languageserver",
-    "copy:languageserver": "cp ../../language-server/io.typefox.examples.theia.states.ide/build/distributions/states-language-server.zip .",
-    "unzip:languageserver": "unzip ./states-language-server.zip -d build/",
+    "copy:languageserver": "cpr ../../language-server/io.typefox.examples.theia.states.ide/build/distributions/states-language-server.zip ./states-language-server.zip -o",
+    "unzip:languageserver": "cross-unzip ./states-language-server.zip ./build/",
     "prepare": "yarn run clean && yarn install:languageserver && yarn run build",
     "clean": "rimraf lib",
     "build": "tsc",
