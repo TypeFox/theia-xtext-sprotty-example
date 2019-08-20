@@ -4,7 +4,7 @@ ports:
   - port: 3000
 tasks:
   - init: |
-      ./gradlew -p language-server build
+      ./language-server/gradlew -p language-server build
       yarn --cwd theia
     command: |
       yarn --cwd theia/browser-app start --hostname=0.0.0.0 ../../ws-theia
