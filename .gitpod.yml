@@ -1,13 +1,10 @@
+image:
+    gitpod/workspace-full-vnc
 ports:
   - port: 3000
 tasks:
-  - init: >
-      cd language-server &&
-      ./gradlew build &&
-      cd ../theia &&
-      yarn &&
-      cd ..
-    command: >
-      cd theia/browser-app &&
-      yarn start --hostname=0.0.0.0 ../../ws-theia
-
+  - init: |
+      ./gradlew -p language-server build
+      yarn --cwd theia
+    command:
+      yarn --cwd theia/browser-app start --hostname=0.0.0.0 ../../ws-theia
