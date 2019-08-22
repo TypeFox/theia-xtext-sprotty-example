@@ -1,10 +1,10 @@
 package io.typefox.examples.theia.states.ide.symbol
 
-import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.lsp4j.SymbolKind
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider
 
 import static io.typefox.examples.theia.states.states.StatesPackage.Literals.*
-import org.eclipse.lsp4j.SymbolKind
 
 class StatesDocumentSymbolKindProvider extends DocumentSymbolKindProvider {
 
