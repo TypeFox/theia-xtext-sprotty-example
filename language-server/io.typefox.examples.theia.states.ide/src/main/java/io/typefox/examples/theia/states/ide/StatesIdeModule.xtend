@@ -4,14 +4,27 @@
 package io.typefox.examples.theia.states.ide
 
 import io.typefox.examples.theia.states.ide.server.codeActions.StatesCodeActionService
+import io.typefox.examples.theia.states.ide.symbol.StatesDocumentSymbolKindProvider
+import io.typefox.examples.theia.states.ide.symbol.StatesDocumentSymbolNameProvider
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider
 
 /**
  * Use this class to register ide components.
  */
 class StatesIdeModule extends AbstractStatesIdeModule {
-	
+
 	def Class<? extends ICodeActionService> bindICodeActionService() {
 		StatesCodeActionService
 	}
+
+	def Class<? extends DocumentSymbolNameProvider> bindDocumentSymbolNameProvider() {
+		StatesDocumentSymbolNameProvider
+	}
+	
+	def Class<? extends DocumentSymbolKindProvider> bindDocumentSymbolKindProvider() {
+		StatesDocumentSymbolKindProvider
+	}
+
 }

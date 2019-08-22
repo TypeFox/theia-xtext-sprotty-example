@@ -3,7 +3,6 @@ package io.typefox.examples.theia.states.ide.diagram
 import org.eclipse.sprotty.ServerLayoutKind
 import org.eclipse.sprotty.xtext.DiagramServerFactory
 import org.eclipse.sprotty.xtext.LanguageAwareDiagramServer
-import org.eclipse.sprotty.ServerLayoutKind
 
 class StatesDiagramServerFactory extends DiagramServerFactory {
 
