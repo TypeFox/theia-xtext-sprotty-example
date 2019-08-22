@@ -5,15 +5,17 @@ package io.typefox.examples.theia.states.validation
 
 import com.google.common.collect.Multimaps
 import io.typefox.examples.theia.states.states.StateMachine
-import io.typefox.examples.theia.states.states.StatesPackage
 import org.eclipse.xtext.validation.Check
 
+import static io.typefox.examples.theia.states.states.StatesPackage.Literals.*
+
 /**
- * This class contains custom validation rules. 
-@@ -11,15 +15,35 @@ package io.typefox.examples.theia.states.validation
+ * This class contains custom validation rules.
  */
 class StatesValidator extends AbstractStatesValidator {
-	
+
+	public static val DISCOURAGED_NAME = 'discouraged-name';
+
 	@Check
 	def checkState(io.typefox.examples.theia.states.states.State state) {
 		val event2transition = Multimaps.index(state.transitions, [event.name ?: ''])
@@ -21,7 +23,7 @@ class StatesValidator extends AbstractStatesValidator {
 			val transitionsWithCommonName = event2transition.get(name)
 			if (transitionsWithCommonName.size > 1) 
 				transitionsWithCommonName.forEach [
-					error('''Multiple transitions on event «name»''', it, StatesPackage.Literals.TRANSITION__EVENT)
+					error('''Multiple transitions on event «name»''', it, TRANSITION__EVENT)
 			]
 		]
 	}
@@ -33,7 +35,7 @@ class StatesValidator extends AbstractStatesValidator {
 			val statesWithCommonName = name2state.get(name)
 			if (statesWithCommonName.size > 1) 
 				statesWithCommonName.forEach [
-					error('''Multiple states named '«name»'«»''', it, StatesPackage.Literals.STATE__NAME)
+					error('''Multiple states named '«name»'«»''', it, STATE__NAME)
 			]
 		]
 		val name2event = Multimaps.index(sm.events, [name ?: ''])
@@ -41,8 +43,18 @@ class StatesValidator extends AbstractStatesValidator {
 			val eventsWithCommonName = name2event.get(name)
 			if (eventsWithCommonName.size > 1) 
 				eventsWithCommonName.forEach [
-					error('''Multiple events named '«name»'«»''', it, StatesPackage.Literals.EVENT__NAME)
+					error('''Multiple events named '«name»'«»''', it, EVENT__NAME)
 			]
 		]
 	}
+
+	@Check
+	def checkName(StateMachine it) {
+		if (!name.nullOrEmpty) {
+			if (Character.isLowerCase(name.charAt(0))) {
+				warning('State machine name should start with an upper case.', it, STATE_MACHINE__NAME, DISCOURAGED_NAME)
+			}
+		}
+	}
+
 }

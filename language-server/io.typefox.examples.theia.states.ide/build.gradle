@@ -8,9 +8,16 @@ dependencies {
 	
 	compile "org.eclipse.sprotty:org.eclipse.sprotty.layout:${sprottyVersion}"
 	compile "org.eclipse.elk:org.eclipse.elk.alg.layered:${elkVersion}"
+	
+	// JUnit 4.x is required for the base LS tests.
+	// See: https://github.com/eclipse/xtext-core/issues/1271
+	testCompile 'junit:junit:4.12'
+	testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 }
 
 apply plugin: 'application'
-mainClassName = "io.typefox.examples.theia.states.ide.launch.StatesServerLauncher"
+mainClassName = 'io.typefox.examples.theia.states.ide.launch.StatesServerLauncher'
 applicationName = 'states-language-server'
 
