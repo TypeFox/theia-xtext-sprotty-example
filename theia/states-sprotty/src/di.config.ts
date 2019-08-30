@@ -11,6 +11,7 @@ import "../css/diagram.css";
 import { PolylineArrowEdgeView, TriangleButtonView } from "./views";
 import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort, StatesLabel } from "./model";
 import { CustomRouter } from "./custom-edge-router";
+import { EditDiagramLocker } from "sprotty-theia";
 
 const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     rebind(TYPES.ILogger).to(ConsoleLogger).inSingletonScope();
@@ -18,6 +19,8 @@ const statesDiagramModule = new ContainerModule((bind, unbind, isBound, rebind) 
     rebind(TYPES.IModelFactory).to(StatesModelFactory);
     unbind(ManhattanEdgeRouter);
     bind(ManhattanEdgeRouter).to(CustomRouter).inSingletonScope();
+    bind(EditDiagramLocker).toSelf().inSingletonScope();
+    rebind(TYPES.IDiagramLocker).toService(EditDiagramLocker);
 
     const context = { bind, unbind, isBound, rebind };
     configureModelElement(context, 'graph', StatesDiagram, SGraphView);

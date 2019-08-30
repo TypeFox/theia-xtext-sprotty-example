@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "@theia/core": "next",
+    "@theia/monaco": "next",
     "sprotty-theia": "next",
     "states-sprotty": "0.0.0"
   },
