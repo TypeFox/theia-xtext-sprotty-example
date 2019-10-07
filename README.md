@@ -56,10 +56,7 @@ The buttons above open the respective stage in Gitpod. To run it, wait for the b
 
 ### Local
 
-To build the example locally, [you need](https://github.com/theia-ide/theia/blob/master/doc/Developing.md#prerequisites)
-* node >= 10.x, < 12.x
-* yarn > 1.3
-* Java > 1.8
+The prerequisites are defined [here](https://github.com/eclipse-theia/theia/blob/master/doc/Developing.md#prerequisites).
 
 To build, run
 ```bash
@@ -74,7 +71,7 @@ From there, to run the browser app
 cd browser-app
 yarn start
 ```
-and point your browser to localhost:3000.
+and point your browser to `localhost:3000`.
 
 Alternatively, run the electron app by running
 ```bash
@@ -83,7 +80,7 @@ cd electron-app
 yarn start
 ```
 
-### Troubleshooting:
+### Troubleshooting
 
 Note, this example application is _single-sourced_. Whenever you want to switch between the electron and the browser-based applications, you have to rebuild it manually.
 When switching to the electron, change the directory to `theia` and run the following:
