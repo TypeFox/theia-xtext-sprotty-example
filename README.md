@@ -28,19 +28,19 @@ We create a new Xtext project, add a grammar for a statemachine DSL, and run the
 
 ### Stage 2: Create a Theia Application and Integrate the DSL Language Server
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#snapshot/9ec04679-b63e-4093-8650-f1baa4283a8d)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/TypeFox/theia-xtext-sprotty-example/tree/xtext-dsl)
 
 We use a [yeoman generator](https://github.com/theia-ide/generator-theia-extension) to create the skeleton for a theia-app with a custom extension. We turn the latter into a language extension for our DSL by copying the LS from the last stage, adding a grammar for highlighting and a bit of glue code. At the end of this stage, our IDE supports the textual statemachine language. Thanks to Xtext's, it already offers validation, content assist, hovers, navigation of references, etc.
 
 ### Stage 3: Add Live-Diagrams for the DSL with Sprotty
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#snapshot/0a727ee8-26bb-4af9-b79c-63fe42aab18e)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/TypeFox/theia-xtext-sprotty-example/tree/graphical-view)
 
 Text is nice, but we want a visual representation of the statemachines as well. Using the Sprotty framework, we add diagram support to the LS, generate a diagram model from the DSL models, and extend the client with a diagram widget. The diagram updates automatically when the source model changes. We use the ELK to layout these diagrams and fine-tune the visual representation. To tie the graphics even stronger to the text, we add tracing and validation markers. Now, selection in the text editor and the diagram are synchronized.
 
 ### Stage 4: Turn the Diagram View into a Graphical Editor (beta)
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#snapshot/bcd7e328-437b-4309-b333-0d399e0d84f1)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/TypeFox/theia-xtext-sprotty-example/tree/master)
 
 In this stage, we turn the graphical view into an editor. We add various interaction patterns to the diagrams to allow the creation of elements, the manipulation of edges, and the editing of labels. all these interactions are mapped to text modifications of the DSL model, such that the diagram is always generated from the text and never the other way around. It is far easier to keep the two representations consistent than with any bi-directional synchronization.
 
