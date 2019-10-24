@@ -16,7 +16,6 @@
     "@theia/monaco": "next",
     "@theia/typescript": "next",
     "@theia/messages": "next",
-    "@theia/java": "next",
     "@theia/git": "next",
     "@theia/file-search": "next",
     "@theia/merge-conflicts": "next",

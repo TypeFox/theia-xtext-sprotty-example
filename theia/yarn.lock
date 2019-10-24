@@ -308,22 +308,6 @@
     p-queue "^2.4.2"
     ts-md5 "^1.2.2"
 
-"@theia/java@next":
-  version "0.10.0-next.c1d367f3"
-  resolved "https://registry.yarnpkg.com/@theia/java/-/java-0.10.0-next.c1d367f3.tgz#a3672e78577562e25b0d27ec731ddcd8e3718e47"
-  integrity sha512-8t06/3ptMoi2a5T2Iag0mVCTiCt9NtCTkJEo4A+gbVULBU8y+vZS3Sfy5N3/tW9tOl+WkcIHBCw67oLecWC4Xg==
-  dependencies:
-    "@theia/core" "0.10.0-next.c1d367f3"
-    "@theia/editor" "0.10.0-next.c1d367f3"
-    "@theia/languages" "0.10.0-next.c1d367f3"
-    "@theia/monaco" "0.10.0-next.c1d367f3"
-    "@types/glob" "^5.0.30"
-    "@types/tar" "4.0.0"
-    glob "^7.1.2"
-    mkdirp "^0.5.0"
-    sha1 "^1.1.1"
-    tar "^4.0.0"
-
 "@theia/json@0.10.0-next.c1d367f3":
   version "0.10.0-next.c1d367f3"
   resolved "https://registry.yarnpkg.com/@theia/json/-/json-0.10.0-next.c1d367f3.tgz#6c6d4a8e3a7bf6028a7c57d0698abc93ba1728d6"
@@ -606,7 +590,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/glob@*", "@types/glob@^5.0.30":
+"@types/glob@*":
   version "5.0.35"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
   dependencies:
@@ -722,12 +706,6 @@
 "@types/tar-fs@^1.16.1":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@types/tar-fs/-/tar-fs-1.16.1.tgz#6e3fba276c173e365ae91e55f7b797a0e64298e5"
-  dependencies:
-    "@types/node" "*"
-
-"@types/tar@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/tar/-/tar-4.0.0.tgz#e3239d969eeb693a012200613860d0eb871c94f0"
   dependencies:
     "@types/node" "*"
 
@@ -2207,10 +2185,6 @@ chardet@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
 
-"charenc@>= 0.0.1":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-
 checksum@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/checksum/-/checksum-0.1.1.tgz#dc6527d4c90be8560dbd1ed4cecf3297d528e9e9"
@@ -2838,10 +2812,6 @@ cross-zip@^2.1.3:
   integrity sha512-xLIETNkzRcU6jGRzenJyRFxahbtP4628xEKMTI/Ql0Vu8m4h8M7uRLVi7E5OYHuJ6VQPsG4icJumKAFUvfm0+A==
   dependencies:
     rimraf "^3.0.0"
-
-"crypt@>= 0.0.1":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
 crypto-browserify@^3.11.0:
   version "3.12.0"
@@ -7461,13 +7431,6 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-sha1@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/sha1/-/sha1-1.1.1.tgz#addaa7a93168f393f19eb2b15091618e2700f848"
-  dependencies:
-    charenc ">= 0.0.1"
-    crypt ">= 0.0.1"
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
@@ -7982,7 +7945,7 @@ tar@^2.0.0:
     fstream "^1.0.2"
     inherits "2"
 
-tar@^4, tar@^4.0.0, tar@^4.0.2:
+tar@^4, tar@^4.0.2:
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.6.tgz#63110f09c00b4e60ac8bcfe1bf3c8660235fbc9b"
   dependencies:
