@@ -21,3 +21,6 @@ apply plugin: 'application'
 mainClassName = 'io.typefox.examples.theia.states.ide.launch.StatesServerLauncher'
 applicationName = 'states-language-server'
 
+test {
+	useJUnitPlatform()
+}
