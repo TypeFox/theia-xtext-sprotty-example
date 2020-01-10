@@ -86,6 +86,6 @@ class StatesReconnectHandler {
 		val parts = path.split('#')
 		if(parts.size !== 2)
 			throw new IllegalArgumentException('Invalid trace URI ' + path)
-		return uriExtensions.toUri(parts.head).appendFragment(parts.last)
+		return uriExtensions.toUri(parts.head).trimQuery.appendFragment(parts.last)
 	}
 }
