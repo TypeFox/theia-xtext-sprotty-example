@@ -1,12 +1,12 @@
 import { Container, ContainerModule } from "inversify";
-import 'sprotty-theia/css/theia-sprotty.css';
 import 'sprotty/css/sprotty.css';
+import 'sprotty-theia/css/theia-sprotty.css';
 import { boundsModule, buttonModule, configureModelElement, ConsoleLogger, defaultModule, expandModule, 
     exportModule, fadeModule, hoverModule, HtmlRoot, HtmlRootView, LogLevel, modelSourceModule, moveModule, 
     openModule, overrideViewerOptions, PreRenderedElement, PreRenderedView, RectangularNodeView, SEdge, 
     selectModule, SGraphView, SLabelView, TYPES, undoRedoModule, viewportModule, decorationModule, 
     SModelRoot, edgeEditModule, SRoutingHandle, SRoutingHandleView, CreateElementCommand, labelEditModule, 
-    configureCommand, updateModule, routingModule, ManhattanEdgeRouter, edgeLayoutModule } from 'sprotty';
+    configureCommand, updateModule, routingModule, ManhattanEdgeRouter, edgeLayoutModule, zorderModule } from 'sprotty';
 import "../css/diagram.css";
 import { PolylineArrowEdgeView, TriangleButtonView } from "./views";
 import { StatesModelFactory, StatesDiagram, StatesNode, CreateTransitionPort, StatesLabel } from "./model";
@@ -43,7 +43,7 @@ export function createStateDiagramContainer(widgetId: string): Container {
     container.load(defaultModule, selectModule, moveModule, boundsModule, undoRedoModule, viewportModule,
         hoverModule, fadeModule, exportModule, expandModule, openModule, buttonModule, modelSourceModule,
         decorationModule, edgeEditModule, edgeLayoutModule, labelEditModule, updateModule, routingModule,
-        statesDiagramModule);
+        statesDiagramModule, zorderModule);
     overrideViewerOptions(container, {
         needsClientLayout: true,
         needsServerLayout: true,

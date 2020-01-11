@@ -4,14 +4,14 @@
 package io.typefox.examples.theia.states.ide
 
 import io.typefox.examples.theia.states.ide.server.codeActions.StatesCodeActionService
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
 
 /**
  * Use this class to register ide components.
  */
 class StatesIdeModule extends AbstractStatesIdeModule {
 	
-	def Class<? extends ICodeActionService> bindICodeActionService() {
+	def Class<? extends ICodeActionService2> bindICodeActionService2() {
 		StatesCodeActionService
 	}
 }

@@ -10,10 +10,11 @@ import org.eclipse.elk.core.options.Direction
 import org.eclipse.elk.core.options.PortSide
 import org.eclipse.elk.core.options.PortAlignment
 import org.eclipse.elk.core.options.PortConstraints
+import org.eclipse.sprotty.Action
 
 class StatesLayoutEngine extends ElkLayoutEngine {
 	
-	override layout(SModelRoot root) {
+	override layout(SModelRoot root, Action cause) {
 		if (root instanceof SGraph) {
 			val configurator = new SprottyLayoutConfigurator
 			configurator.configureByType('graph')
@@ -26,7 +27,7 @@ class StatesLayoutEngine extends ElkLayoutEngine {
 			configurator.configureByType('port')
 				.setProperty(CoreOptions.PORT_SIDE, PortSide.EAST)
 				.setProperty((CoreOptions.PORT_BORDER_OFFSET), 3.0)
-			layout(root, configurator)
+			layout(root, configurator, cause)
 		}
 	}
 }
