@@ -17,12 +17,12 @@
 }
 
 .sprotty-edge .sprotty-label {
-    fill: var(--theia-ui-font-color0);
+    fill: var(--theia-foreground);
 }
 
 .sprotty-edge {
     fill:none;
-    stroke:#B4B4B4;
+    stroke: var(--theia-foreground);
     stroke-width: 2px;
 }
 

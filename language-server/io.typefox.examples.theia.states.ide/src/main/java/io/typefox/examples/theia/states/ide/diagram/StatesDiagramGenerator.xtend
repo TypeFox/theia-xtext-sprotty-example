@@ -16,6 +16,7 @@ import org.eclipse.sprotty.SPort
 import org.eclipse.sprotty.xtext.IDiagramGenerator
 import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
+import static io.typefox.examples.theia.states.states.StatesPackage.Literals.*
 
 class StatesDiagramGenerator implements IDiagramGenerator {
 	
@@ -28,7 +29,7 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 	
 	def toSGraph(StateMachine sm, extension Context context) {
 		(new SGraph [
-			id = idCache.uniqueId(sm, sm.name)
+			id = idCache.uniqueId(sm, sm?.name ?: "undefined")
 			children = (sm.states.map[toSNode(context)] 
 					  + sm.states.map[transitions].flatten.map[toSEdge(context)]
 			).toList 
@@ -43,7 +44,7 @@ class StatesDiagramGenerator implements IDiagramGenerator {
 				(new SLabel [
 					id = idCache.uniqueId(theId + '.label')
 					text = state.name 
-				]).trace(state),
+				]).trace(state, STATE__NAME, -1),
 				new SPort [
 					id = idCache.uniqueId(theId + '.newTransition')
 				]				

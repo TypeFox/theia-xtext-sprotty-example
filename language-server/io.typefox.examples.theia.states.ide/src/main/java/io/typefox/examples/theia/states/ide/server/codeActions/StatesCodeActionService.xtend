@@ -13,19 +13,18 @@ import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtext.ide.server.Document
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
 
-class StatesCodeActionService implements ICodeActionService {
+class StatesCodeActionService implements ICodeActionService2 {
 	
 	static val CREATE_STATE_KIND = 'sprotty.create.state'
 	static val CREATE_EVENT_KIND = 'sprotty.create.event'
 	
-	override getCodeActions(Document document, XtextResource resource, CodeActionParams params, CancelIndicator indicator) {
-		var root = resource.contents.head
+	
+	override getCodeActions(Options options) {
+		var root = options.resource.contents.head
 		if (root instanceof StateMachine)
-			createCodeActions(root, params, document)
+			createCodeActions(root, options.codeActionParams, options.document)
 		 else
 		 	emptyList
 	}
