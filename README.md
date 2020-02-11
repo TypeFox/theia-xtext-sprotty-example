@@ -93,4 +93,4 @@ If you want to use the browser-based application, rebuild it for the browser fro
 yarn rebuild:browser
 ```
 
-Please note, t
+Please note that you must have python installed on your local machine to build the project. Currently the project can only be built with Python version 2.7+.
