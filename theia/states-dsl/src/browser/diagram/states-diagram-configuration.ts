@@ -3,11 +3,11 @@ import { configureCommand, configureModelElement, KeyTool, TYPES } from 'sprotty
 import { CodeActionPalettePopupProvider, CodeActionProvider, CompletionLabelEditor, 
     DeleteWithWorkspaceEditCommand, DiagramConfiguration, IRootPopupModelProvider, 
     LSTheiaDiagramServer, LSTheiaDiagramServerProvider, PaletteButton, PaletteMouseListener, 
-    RenameLabelEditor, TheiaDiagramServer, TheiaKeyTool, WorkspaceEditCommand } from "sprotty-theia";
+    RenameLabelEditor, TheiaDiagramServer, TheiaKeyTool, WorkspaceEditCommand, EditDiagramLocker } from "sprotty-theia";
 import { createStateDiagramContainer } from 'states-sprotty/lib/di.config';
 import { PaletteButtonView } from 'states-sprotty/lib/html-views';
 import { StatesDiagramServer } from "./states-diagram-server";
-
+import "sprotty-theia/css/theia-sprotty.css"
 export const STATES_DIAGRAM_TYPE = 'states-diagram';
 
 @injectable()
@@ -40,7 +40,10 @@ export class StatesDiagramConfiguration implements DiagramConfiguration {
 
         container.bind(CompletionLabelEditor).toSelf().inSingletonScope();
         container.bind(RenameLabelEditor).toSelf().inSingletonScope();
-
+        
+        container.bind(EditDiagramLocker).toSelf().inSingletonScope();
+        container.rebind(TYPES.IDiagramLocker).toService(EditDiagramLocker);
+        
         return container;
     }
 }

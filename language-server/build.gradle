@@ -1,6 +1,6 @@
 buildscript {
 	repositories {
-		jcenter()
+		maven { url 'https://oss.sonatype.org/content/repositories/releases' }		
 	}
 	dependencies {
 		classpath 'org.xtext:xtext-gradle-plugin:2.0.1'
@@ -8,13 +8,12 @@ buildscript {
 }
 
 subprojects {
-	ext.xtextVersion = '2.19.0'
-	ext.sprottyVersion = "0.7.0"
-	ext.elkVersion = "0.5.0"
+	ext.xtextVersion = '2.21.0'
+	ext.sprottyVersion = "0.8.0"
+	ext.elkVersion = "0.6.1"
 	
 	repositories {
-		jcenter()
-		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }		
+		maven { url 'https://oss.sonatype.org/content/repositories/releases' }		
 	}
 	
 	apply plugin: 'java'

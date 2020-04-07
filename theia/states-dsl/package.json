@@ -11,9 +11,9 @@
     "data"
   ],
   "dependencies": {
-    "@theia/core": "next",
-    "@theia/monaco": "next",
-    "sprotty-theia": "next",
+    "@theia/core": "1.0.0",
+    "@theia/monaco": "1.0.0",
+    "sprotty-theia": "0.8.0",
     "states-sprotty": "0.0.0"
   },
   "devDependencies": {
